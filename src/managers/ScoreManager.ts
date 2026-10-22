@@ -87,6 +87,21 @@ export class ScoreManager {
     return bonus;
   }
 
+  /** Double coins collected this run from rewarded ad */
+  public doubleCoins(): number {
+    const gained = this.coins;
+    this.coins += gained;
+    this.careerCoins += gained;
+    try {
+      localStorage.setItem('roadster_career_coins', String(this.careerCoins));
+      if (this.coins > this.bestCoins) {
+        this.bestCoins = this.coins;
+        localStorage.setItem('roadster_best_coins', String(this.bestCoins));
+      }
+    } catch { /* ignore */ }
+    return gained;
+  }
+
   /** Update combo timer */
   public updateCombo(dt: number): void {
     this.elapsedTime += dt;

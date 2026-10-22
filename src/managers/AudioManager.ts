@@ -800,6 +800,13 @@ export class AudioManager {
     return this.muted;
   }
 
+  public setMuted(mute: boolean): void {
+    this.muted = mute;
+    if (this.masterGain && this.ctx) {
+      this.masterGain.gain.setValueAtTime(this.muted ? 0 : this.masterVolume, this.ctx.currentTime);
+    }
+  }
+
   public setMasterVolume(v: number): void {
     this.masterVolume = Math.max(0, Math.min(1, v));
     if (this.masterGain && this.ctx && !this.muted) {

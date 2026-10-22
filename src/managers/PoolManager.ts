@@ -156,4 +156,13 @@ export class PoolManager {
       car.deactivate();
     }
   }
+
+  /** Clear traffic directly in front of player upon revival so player doesn't instantly re-crash */
+  public clearTrafficAhead(playerZ: number, distance = 60): void {
+    for (const car of this.trafficPool) {
+      if (car.active && car.mesh.position.z < playerZ && car.mesh.position.z > playerZ - distance) {
+        car.deactivate();
+      }
+    }
+  }
 }

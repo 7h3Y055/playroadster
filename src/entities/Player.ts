@@ -41,6 +41,10 @@ export class Player implements Updatable {
   // ── 10 Cold-Gas Thrusters & Physical Nozzles ──
   public readonly coldGasThrusters: ColdGasThrusters;
 
+  // ── Invulnerability Shield (from Revive / Ad Perk) ──
+  public isShielded = false;
+  public shieldTimer = 0;
+
   // ── Air Tank (Roadster Dash SpaceX Package: 600 L) ──
   public air = 600;
   public readonly airCapacity = 600;
@@ -176,6 +180,18 @@ export class Player implements Updatable {
 
     this.justCompletedTrick = null;
     this.justLandedSlam = false;
+
+    // Tick invulnerability shield
+    if (this.shieldTimer > 0) {
+      this.shieldTimer -= dt;
+      this.isShielded = this.shieldTimer > 0;
+      // Strobe opacity/visibility during shield
+      const strobe = Math.sin(this.shieldTimer * 26) > 0;
+      this.mesh.visible = strobe || this.shieldTimer <= 0;
+      if (this.shieldTimer <= 0) {
+        this.mesh.visible = true;
+      }
+    }
 
     // Detect single-press edge triggers
     const leftPressed = input.left && !this.prevInputLeft;
@@ -655,4 +671,50 @@ export class Player implements Updatable {
       w.rotation.y = 0;
     }
   }
+
+  /** Revive player car on road after rewarded ad */
+  public revive(): void {
+    this.currentLane = 0;
+    this.laneFromX = 0;
+    this.laneTargetX = 0;
+    this.laneT = 1.0;
+    this.positionY = 0;
+    this.velocityY = 0;
+    this.air = this.airCapacity;
+    this.isGrounded = true;
+    this.isHovering = false;
+    this.isBoosting = false;
+    this.isFlipping = false;
+    this.isRolling = false;
+    this.trick = null;
+    this.wingT = 0;
+    this.roadsterModel.setWing(0);
+    this.lateralYaw = 0;
+    this.lateralRoll = 0;
+    this.lateralRollV = 0;
+    this.susp = 0;
+    this.suspV = 0;
+    this.rollSettle = 0;
+    this.flipSettle = 0;
+    this.rollTail = 0;
+    this.flipTail = 0;
+    this.roll = 0;
+    this.flip = 0;
+    this.prevX = 0;
+    this.mesh.position.x = 0;
+    this.mesh.position.y = 0;
+    this.mesh.rotation.set(0, 0, 0);
+    this.pivot.rotation.set(0, 0, 0);
+    this.carContainer.position.set(0, -0.55, 0);
+    this.carContainer.rotation.set(0, 0, 0);
+    this.coldGasThrusters.reset();
+    for (const w of this.frontWheels) {
+      w.rotation.y = 0;
+    }
+    // Grant 3.5-second invulnerability shield
+    this.isShielded = true;
+    this.shieldTimer = 3.5;
+    this.mesh.visible = true;
+  }
 }
+

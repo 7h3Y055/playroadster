@@ -217,6 +217,60 @@ export class HUD {
     document.getElementById('gameover')!.classList.add('hidden');
   }
 
+  // ── Revive Modal ──────────────────────
+  public showReviveModal(score: number, distance: number): void {
+    const reviveScreen = document.getElementById('revive-modal');
+    if (!reviveScreen) return;
+    const scoreEl = document.getElementById('revive-score');
+    if (scoreEl) scoreEl.textContent = String(score);
+    const distEl = document.getElementById('revive-dist');
+    if (distEl) distEl.textContent = `${Math.floor(distance)} m`;
+    reviveScreen.classList.remove('hidden');
+  }
+
+  public updateReviveCountdown(seconds: number, progressRatio: number): void {
+    const countdownEl = document.getElementById('revive-countdown');
+    if (countdownEl) countdownEl.textContent = String(seconds);
+    const circle = document.getElementById('revive-timer-circle') as unknown as SVGCircleElement | null;
+    if (circle) {
+      const totalCircumference = 263.89; // 2 * PI * 42
+      circle.style.strokeDashoffset = String(totalCircumference * (1 - progressRatio));
+    }
+  }
+
+  public hideReviveModal(): void {
+    document.getElementById('revive-modal')?.classList.add('hidden');
+  }
+
+  // ── Rewarded Double Coins ─────────────
+  public setupDoubleCoinsButton(coins: number, onClick: () => void): void {
+    const btn = document.getElementById('go-double-coins-btn') as HTMLButtonElement | null;
+    const textEl = document.getElementById('double-coins-text');
+    if (!btn || !textEl) return;
+
+    if (coins <= 0) {
+      btn.classList.add('hidden');
+      return;
+    }
+
+    textEl.textContent = `DOUBLE TOKENS (+${coins})`;
+    btn.classList.remove('hidden');
+    btn.disabled = false;
+    btn.onclick = onClick;
+  }
+
+  public setDoubleCoinsClaimed(newCoins: number, newCareerCoins: number): void {
+    const btn = document.getElementById('go-double-coins-btn') as HTMLButtonElement | null;
+    const textEl = document.getElementById('double-coins-text');
+    if (textEl) textEl.textContent = `TOKENS DOUBLED! ✓`;
+    if (btn) btn.disabled = true;
+
+    const goCoinsEl = document.getElementById('go-coins');
+    if (goCoinsEl) goCoinsEl.textContent = String(newCoins);
+    const goCareerCoinsEl = document.getElementById('go-career-coins');
+    if (goCareerCoinsEl) goCareerCoinsEl.textContent = String(newCareerCoins);
+  }
+
   // ── Menu Screen ───────────────────────
   public showMenu(): void {
     document.getElementById('menu')!.classList.remove('hidden');

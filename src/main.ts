@@ -15,8 +15,9 @@ import { TrafficModelLoader } from '@utils/TrafficModelLoader';
 import { GraphicsManager, type GraphicsMode } from '@managers/GraphicsManager';
 import { CoinManager } from '@managers/CoinManager';
 import { SettingsManager } from '@managers/SettingsManager';
+import { AdManager } from '@managers/AdManager';
 
-type GameState = 'LOADING' | 'MENU' | 'COUNTDOWN' | 'PLAYING' | 'PAUSED' | 'GAME_OVER';
+type GameState = 'LOADING' | 'MENU' | 'COUNTDOWN' | 'PLAYING' | 'PAUSED' | 'GAME_OVER' | 'REVIVE_PROMPT';
 
 class RoadsterDashGame {
   private state: GameState = 'LOADING';
@@ -36,6 +37,11 @@ class RoadsterDashGame {
   private readonly hud: HUD;
   private readonly graphics: GraphicsManager;
   private readonly settings: SettingsManager;
+  private readonly adManager: AdManager;
+
+  // ── Revive & Monetization State ─────────
+  private revivesUsed = 0;
+  private reviveTimer: ReturnType<typeof setInterval> | null = null;
 
   // ── Camera tracking ─────────────────────
   private currentFov = 34;
@@ -119,6 +125,20 @@ class RoadsterDashGame {
       this._updateMenuStats();
     };
 
+    // ── Monetization & Ad System Wiring ─────
+    let wasMutedBeforeAd = false;
+    this.adManager = new AdManager({
+      onAdStart: () => {
+        wasMutedBeforeAd = this.audio.isMuted;
+        this.audio.setMuted(true);
+      },
+      onAdEnd: () => {
+        if (!wasMutedBeforeAd) {
+          this.audio.setMuted(false);
+        }
+      },
+    });
+
     // ── Player Thruster & Stunt Events Wiring ──
     this.player.events = {
       onPuff: () => {
@@ -167,7 +187,9 @@ class RoadsterDashGame {
     if (retryBtn) {
       retryBtn.addEventListener('click', () => {
         this.audio.playClick();
-        this._startCountdown();
+        this.adManager.recordGameOverAndCheckInterstitial().then(() => {
+          this._startCountdown();
+        });
       });
     }
 
@@ -175,7 +197,25 @@ class RoadsterDashGame {
     if (goMenuBtn) {
       goMenuBtn.addEventListener('click', () => {
         this.audio.playClick();
-        this._showMenu();
+        this.adManager.recordGameOverAndCheckInterstitial().then(() => {
+          this._showMenu();
+        });
+      });
+    }
+
+    const reviveBtn = document.getElementById('revive-btn');
+    if (reviveBtn) {
+      reviveBtn.addEventListener('click', () => {
+        this.audio.playClick();
+        this._handleReviveChoice();
+      });
+    }
+
+    const reviveSkipBtn = document.getElementById('revive-skip-btn');
+    if (reviveSkipBtn) {
+      reviveSkipBtn.addEventListener('click', () => {
+        this.audio.playClick();
+        this._dismissReviveAndFinishGameOver();
       });
     }
 
@@ -326,10 +366,12 @@ class RoadsterDashGame {
     this.state = 'MENU';
     this.hud.hide();
     this.hud.hideGameOver();
+    this.hud.hideReviveModal();
     this._updateMenuStats();
     this.hud.showMenu();
     this.audio.stopAll();
     this.speedLines.reset();
+    this.adManager.initBanners();
   }
 
   private _updateMenuStats(): void {
@@ -428,6 +470,13 @@ class RoadsterDashGame {
   }
 
   private _resetGameState(): void {
+    if (this.reviveTimer) {
+      clearInterval(this.reviveTimer);
+      this.reviveTimer = null;
+    }
+    this.revivesUsed = 0;
+    this.hud.hideReviveModal();
+
     this.player.reset();
     this.pool.reset();
     this.spawn.reset();
@@ -444,26 +493,107 @@ class RoadsterDashGame {
   }
 
   private _triggerGameOver(): void {
-    this.state = 'GAME_OVER';
     this.audio.playCrash();
     this.audio.stopAll();
     this.speedLines.reset();
-
     this.hud.flash(250);
 
+    // If player hasn't used a revive this run, offer the Second Chance Rewarded Ad!
+    if (this.revivesUsed === 0) {
+      this.state = 'REVIVE_PROMPT';
+      setTimeout(() => {
+        this._startReviveCountdown();
+      }, 500);
+      return;
+    }
+
+    this._finishGameOver();
+  }
+
+  private _startReviveCountdown(): void {
+    this.hud.showReviveModal(this.score.score, this.score.distance);
+    let secondsLeft = 5;
+    const totalSecs = 5;
+    this.hud.updateReviveCountdown(secondsLeft, 1.0);
+
+    if (this.reviveTimer) clearInterval(this.reviveTimer);
+
+    this.reviveTimer = setInterval(() => {
+      secondsLeft--;
+      const ratio = Math.max(0, secondsLeft / totalSecs);
+      this.hud.updateReviveCountdown(Math.max(0, secondsLeft), ratio);
+
+      if (secondsLeft <= 0) {
+        if (this.reviveTimer) {
+          clearInterval(this.reviveTimer);
+          this.reviveTimer = null;
+        }
+        this._dismissReviveAndFinishGameOver();
+      }
+    }, 1000);
+  }
+
+  private _handleReviveChoice(): void {
+    if (this.reviveTimer) {
+      clearInterval(this.reviveTimer);
+      this.reviveTimer = null;
+    }
+    this.hud.hideReviveModal();
+
+    this.adManager.showRewardedAd(
+      'revive',
+      () => {
+        // Player completed ad -> Revive on road!
+        this.revivesUsed++;
+        this.player.revive();
+        this.pool.clearTrafficAhead(this.player.mesh.position.z, 60);
+        this.audio.playCoin();
+        this.hud.showPopup('REVIVED! 3S SHIELD ACTIVE 🛡️');
+        this.state = 'PLAYING';
+        this.audio.playEngine();
+      },
+      () => {
+        // Ad dismissed or declined
+        this._finishGameOver();
+      }
+    );
+  }
+
+  private _dismissReviveAndFinishGameOver(): void {
+    if (this.reviveTimer) {
+      clearInterval(this.reviveTimer);
+      this.reviveTimer = null;
+    }
+    this.hud.hideReviveModal();
+    this._finishGameOver();
+  }
+
+  private _finishGameOver(): void {
+    this.state = 'GAME_OVER';
     const isRecord = this.score.saveBest();
     const timeStr = this.score.getTimeString();
 
-    setTimeout(() => {
-      this.hud.showGameOver(
-        this.score.score,
-        this.score.distance,
-        timeStr,
-        isRecord,
-        this.score.coins,
-        this.score.careerCoins
-      );
-    }, 600);
+    this.hud.showGameOver(
+      this.score.score,
+      this.score.distance,
+      timeStr,
+      isRecord,
+      this.score.coins,
+      this.score.careerCoins
+    );
+
+    // Setup Rewarded Double Coins button
+    this.hud.setupDoubleCoinsButton(this.score.coins, () => {
+      this.adManager.showRewardedAd('double_coins', () => {
+        const gained = this.score.doubleCoins();
+        this.audio.playCoin();
+        this.hud.setDoubleCoinsClaimed(this.score.coins, this.score.careerCoins);
+        this.hud.showPopup(`TOKENS DOUBLED! +${gained} 🪙`);
+      });
+    });
+
+    // Refresh banner units
+    this.adManager.initBanners();
   }
 
   // ── Fixed Timestep Update ───────────────
@@ -598,6 +728,10 @@ class RoadsterDashGame {
       const overlapZ = pBox.minZ <= cBox.maxZ && pBox.maxZ >= cBox.minZ;
 
       if (overlapX && overlapY && overlapZ) {
+        if (this.player.isShielded) {
+          // Protected by 3-second Revive Shield — pass through traffic safely
+          continue;
+        }
         if (this.score.feverActive) {
           // Invincible Rocket Mode — plow through obstacles!
           this.pool.releaseTraffic(car);

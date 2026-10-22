@@ -195,6 +195,12 @@
               <span>SHARE</span>
             </button>
           </div>
+          <div class="ad-banner-slot">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:50px"
+                 data-ad-client="ca-pub-7506557022815222"
+                 data-ad-slot="auto"></ins>
+          </div>
           <div class="menu-legal">
             <a href="/privacy.html" target="_blank" rel="noopener" class="legal-link">Privacy Policy</a>
           </div>
@@ -213,6 +219,11 @@
             <div><span class="k">CAREER</span><span class="v mono gold-val" id="go-career-coins">0</span></div>
           </div>
           <div class="go-actions">
+            <button id="go-double-coins-btn" class="btn-rewarded hidden" aria-label="Double Tokens">
+              <span class="reward-icon">🪙</span>
+              <span id="double-coins-text">DOUBLE TOKENS (+0)</span>
+              <span class="ad-tag">AD</span>
+            </button>
             <button id="go-share-btn" class="btn-share" aria-label="Share Score">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="18" cy="5" r="3"></circle>
@@ -228,6 +239,57 @@
               <button id="go-settings-btn" class="btn-ghost">SETTINGS</button>
               <button id="go-menu-btn" class="btn-ghost">MENU</button>
             </div>
+          </div>
+          <div class="ad-banner-slot">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:50px"
+                 data-ad-client="ca-pub-7506557022815222"
+                 data-ad-slot="auto"></ins>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Revive / Second Chance Modal ───────────── -->
+      <div id="revive-modal" class="screen hidden">
+        <div class="revive-card">
+          <div class="revive-header">
+            <span class="revive-badge">CRASHED!</span>
+            <h2>SECOND CHANCE?</h2>
+          </div>
+          <div class="revive-stats">
+            <div class="revive-stat"><span class="k">SCORE</span><span class="v mono" id="revive-score">0</span></div>
+            <div class="revive-stat"><span class="k">DISTANCE</span><span class="v mono" id="revive-dist">0 m</span></div>
+          </div>
+          <div class="revive-timer-ring">
+            <svg viewBox="0 0 100 100" class="timer-svg">
+              <circle class="timer-bg" cx="50" cy="50" r="42"></circle>
+              <circle class="timer-bar" id="revive-timer-circle" cx="50" cy="50" r="42"></circle>
+            </svg>
+            <span id="revive-countdown" class="mono">5</span>
+          </div>
+          <button id="revive-btn" class="btn-revive" aria-label="Watch Ad to Revive">
+            <span class="reward-icon">🎬</span>
+            <span>REVIVE ROADSTER</span>
+            <span class="ad-tag">AD</span>
+          </button>
+          <button id="revive-skip-btn" class="btn-text-skip">NO THANKS, END RUN</button>
+        </div>
+      </div>
+
+      <!-- ── Sponsored Ad Overlay ───────────── -->
+      <div id="ad-container" class="ad-overlay hidden">
+        <div class="ad-box">
+          <div class="ad-top-bar">
+            <span class="ad-sponsor-label">SPONSORED ADVERTISEMENT</span>
+            <span class="ad-countdown mono" id="ad-timer">Reward in 5s</span>
+          </div>
+          <div class="ad-content" id="ad-content">
+            <div class="ad-brand">ROADSTER <span>HYPERDRIVE</span></div>
+            <p class="ad-tagline">SpaceX Cold-Gas Thruster Package · 0-60 in 1.1s</p>
+            <div class="ad-progress-bar"><div class="ad-progress-fill" id="ad-progress-fill"></div></div>
+          </div>
+          <div class="ad-bottom-bar">
+            <span class="ad-notice">Ad playing · Audio muted</span>
           </div>
         </div>
       </div>
