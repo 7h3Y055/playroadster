@@ -964,6 +964,42 @@ html, body {
   white-space: nowrap;
 }
 
+/* ── Share Score Button ──────────────── */
+.btn-share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background: linear-gradient(135deg, var(--color-ocean-cyan), var(--color-soft-mint));
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--color-dark-navy);
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+  text-transform: uppercase;
+  box-shadow: 0 0 16px rgba(11, 211, 211, 0.35);
+}
+
+.btn-share:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 24px rgba(11, 211, 211, 0.65);
+  filter: brightness(1.05);
+}
+
+.btn-share:active {
+  transform: scale(0.98);
+}
+
+.btn-share svg {
+  flex-shrink: 0;
+}
+
 /* ── Start Guide (Controls overlay) ──── */
 .start-guide {
   position: absolute;

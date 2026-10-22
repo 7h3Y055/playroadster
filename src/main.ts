@@ -179,6 +179,20 @@ class RoadsterDashGame {
       });
     }
 
+    const goShareBtn = document.getElementById('go-share-btn');
+    if (goShareBtn) {
+      goShareBtn.addEventListener('click', () => {
+        this._shareScore(false);
+      });
+    }
+
+    const menuShareBtn = document.getElementById('menu-share-btn');
+    if (menuShareBtn) {
+      menuShareBtn.addEventListener('click', () => {
+        this._shareScore(true);
+      });
+    }
+
     const pauseBtn = document.getElementById('pause-btn');
     if (pauseBtn) {
       pauseBtn.addEventListener('click', () => this._togglePause());
@@ -370,6 +384,46 @@ class RoadsterDashGame {
     const muteBtn = document.getElementById('mute-btn');
     if (muteBtn) {
       muteBtn.classList.toggle('active', isMuted);
+    }
+  }
+
+  /** Native Web Share API or Clipboard Fallback for sharing runs */
+  private async _shareScore(isMenu = false): Promise<void> {
+    const scoreVal = isMenu ? this.score.bestScore : this.score.score;
+    const distVal = isMenu ? Math.floor(this.score.bestDistance) : Math.floor(this.score.distance);
+    const tokensVal = isMenu ? this.score.careerCoins : this.score.coins;
+
+    const shareUrl = 'https://play-roadster.live';
+    const title = 'PlayRoadster — Miami Ocean Drive';
+    const shareText = isMenu
+      ? `🏎️ My best run in PlayRoadster is ${scoreVal} pts (${distVal}m) with ${tokensVal} tokens! Can you beat me on Ocean Drive? 🌴✨`
+      : `🏎️ I just scored ${scoreVal} pts (${distVal}m) dodging traffic on Ocean Drive in PlayRoadster! Can you beat my score? 🌴✨`;
+
+    this.audio.playClick();
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title,
+          text: shareText,
+          url: shareUrl,
+        });
+        this.hud.showPopup('SHARED! 🚀');
+        return;
+      } catch (err) {
+        if ((err as Error).name === 'AbortError') {
+          return; // User dismissed share sheet
+        }
+      }
+    }
+
+    // Fallback: Copy to clipboard
+    try {
+      await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+      this.audio.playCoin();
+      this.hud.showPopup('SCORE COPIED TO CLIPBOARD! 📋');
+    } catch {
+      window.prompt('Copy and share your score:', `${shareText}\n${shareUrl}`);
     }
   }
 
