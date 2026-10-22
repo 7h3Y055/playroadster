@@ -886,6 +886,30 @@ html, body {
   justify-content: center;
 }
 
+.menu-legal {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-xs);
+}
+
+.legal-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color var(--transition-fast);
+}
+
+.legal-link:hover {
+  color: var(--color-ocean-cyan);
+  text-decoration: underline;
+}
+
 /* ── Game Over Card ──────────────────── */
 .go-card {
   display: flex;
