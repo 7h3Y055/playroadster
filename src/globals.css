@@ -1558,6 +1558,175 @@ html, body {
     line-height: 1;
     margin-bottom: 2px;
   }
+
+  /* ── Mobile Main Menu Optimization ── */
+  #menu.screen {
+    align-items: center;
+    justify-content: center;
+    padding: max(var(--space-md), env(safe-area-inset-top, 16px)) max(var(--space-md), env(safe-area-inset-right, 16px)) max(var(--space-md), env(safe-area-inset-bottom, 16px)) max(var(--space-md), env(safe-area-inset-left, 16px));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .menu-content {
+    width: 100%;
+    max-width: 390px;
+    margin: auto;
+    padding: var(--space-lg) var(--space-md);
+    gap: var(--space-sm);
+    align-items: center;
+    text-align: center;
+    max-height: calc(100dvh - 32px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-lg);
+  }
+
+  .menu-brand {
+    align-items: center;
+    gap: 2px;
+  }
+
+  .menu-brand-sub {
+    font-size: 10px;
+    letter-spacing: 5px;
+  }
+
+  .menu-brand h1 {
+    font-size: clamp(28px, 7.5vw, 40px);
+    letter-spacing: 3px;
+    line-height: 1.05;
+  }
+
+  .menu-stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xs);
+    padding: var(--space-xs) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+  }
+
+  .menu-stats .stat-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+
+  .menu-stats .stat-value {
+    font-size: 16px;
+  }
+
+  .graphics-panel {
+    width: 100%;
+    margin: 2px 0;
+    gap: 4px;
+  }
+
+  .graphics-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  .graphics-tabs {
+    gap: 4px;
+  }
+
+  .graphics-tab {
+    padding: 6px 2px;
+    min-height: 42px;
+  }
+
+  .graphics-tab .tab-title {
+    font-size: 11px;
+  }
+
+  .graphics-tab .tab-sub {
+    font-size: 7.5px;
+  }
+
+  #play-btn.btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 13px var(--space-md);
+    font-size: 18px;
+    letter-spacing: 3px;
+    min-height: 48px;
+  }
+
+  #play-btn .hint {
+    display: none !important;
+  }
+
+  .menu-row-buttons {
+    width: 100%;
+    gap: 6px;
+  }
+
+  .menu-row-buttons .btn-ghost {
+    padding: 10px 4px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    min-height: 40px;
+    white-space: nowrap;
+  }
+
+  .ad-banner-slot {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    min-height: 50px;
+  }
+
+  .settings-card {
+    max-height: calc(100dvh - 24px);
+    width: calc(100% - 16px);
+  }
+
+  .settings-header {
+    padding: var(--space-md);
+  }
+
+  .settings-body {
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 380px) {
+  .menu-content {
+    padding: var(--space-md) var(--space-sm);
+    gap: 6px;
+  }
+
+  .menu-brand h1 {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+
+  .menu-stats .stat-value {
+    font-size: 14px;
+  }
+
+  .menu-row-buttons .btn-ghost {
+    font-size: 10px;
+    padding: 8px 2px;
+  }
+}
+
+@media (max-height: 540px) {
+  #menu.screen {
+    align-items: flex-start;
+  }
+
+  .menu-content {
+    margin: var(--space-sm) auto;
+  }
 }
 
 @media (max-width: 600px) {
