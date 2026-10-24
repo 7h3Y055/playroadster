@@ -50,7 +50,6 @@ export class InputManager {
   private touchStartX = 0;
   private touchStartY = 0;
   private touchActive = false;
-  private swipeHandled = false;
 
   private static readonly SWIPE_THRESHOLD = 30; // px
 
@@ -135,7 +134,6 @@ export class InputManager {
     this.touchStartX = t.clientX;
     this.touchStartY = t.clientY;
     this.touchActive = true;
-    this.swipeHandled = false;
 
     // Tap = action (play/retry)
     this.edgeAction = true;
@@ -145,7 +143,7 @@ export class InputManager {
   };
 
   private _onTouchMove = (e: TouchEvent): void => {
-    if (!this.touchActive || this.swipeHandled || e.touches.length === 0) return;
+    if (!this.touchActive || e.touches.length === 0) return;
     e.preventDefault();
 
     const t = e.touches[0]!;
@@ -155,10 +153,18 @@ export class InputManager {
     if (Math.abs(dx) > InputManager.SWIPE_THRESHOLD) {
       if (dx < 0) this.edgeLeft = true;
       else this.edgeRight = true;
-      this.swipeHandled = true;
+      // Reset origin to enable chained swipes without lifting finger
+      this.touchStartX = t.clientX;
+      this.touchStartY = t.clientY;
     } else if (dy > InputManager.SWIPE_THRESHOLD) {
       this.edgeSlam = true;
-      this.swipeHandled = true;
+      this.touchStartX = t.clientX;
+      this.touchStartY = t.clientY;
+    } else if (dy < -InputManager.SWIPE_THRESHOLD) {
+      this.edgeAction = true;
+      this.keysDown.add('Space');
+      this.touchStartX = t.clientX;
+      this.touchStartY = t.clientY;
     }
   };
 
