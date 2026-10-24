@@ -50,8 +50,11 @@ export class InputManager {
   private touchStartX = 0;
   private touchStartY = 0;
   private touchActive = false;
+  private touchFlying = false;
+  private touchBoosting = false;
+  private lastTouchTime = 0;
 
-  private static readonly SWIPE_THRESHOLD = 30; // px
+  private static readonly SWIPE_THRESHOLD = 26; // px
 
   constructor() {
     window.addEventListener('keydown', this._onKeyDown);
@@ -59,6 +62,44 @@ export class InputManager {
     window.addEventListener('touchstart', this._onTouchStart, { passive: false });
     window.addEventListener('touchmove', this._onTouchMove, { passive: false });
     window.addEventListener('touchend', this._onTouchEnd, { passive: false });
+    window.addEventListener('touchcancel', this._onTouchEnd, { passive: false });
+
+    // Wire on-screen mobile boost button if present
+    this._initMobileBoostButton();
+  }
+
+  private _initMobileBoostButton(): void {
+    const attach = () => {
+      const btn = document.getElementById('mobile-boost-btn');
+      if (!btn) return;
+
+      const startBoost = (e: Event) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.touchBoosting = true;
+        btn.classList.add('active');
+      };
+
+      const stopBoost = (e: Event) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.touchBoosting = false;
+        btn.classList.remove('active');
+      };
+
+      btn.addEventListener('touchstart', startBoost, { passive: false });
+      btn.addEventListener('touchend', stopBoost, { passive: false });
+      btn.addEventListener('touchcancel', stopBoost, { passive: false });
+      btn.addEventListener('mousedown', startBoost);
+      btn.addEventListener('mouseup', stopBoost);
+      btn.addEventListener('mouseleave', stopBoost);
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', attach);
+    } else {
+      attach();
+    }
   }
 
   /**
@@ -74,9 +115,17 @@ export class InputManager {
     this.state.pause = this.edgePause;
     this.state.mute = this.edgeMute;
 
-    // Continuous
-    this.state.fly = this.keysDown.has('Space') || this.keysDown.has('ArrowUp') || this.keysDown.has('KeyW');
-    this.state.boost = this.keysDown.has('ShiftLeft') || this.keysDown.has('ShiftRight');
+    // Continuous (Keyboard or Mobile touch state)
+    this.state.fly =
+      this.keysDown.has('Space') ||
+      this.keysDown.has('ArrowUp') ||
+      this.keysDown.has('KeyW') ||
+      this.touchFlying;
+
+    this.state.boost =
+      this.keysDown.has('ShiftLeft') ||
+      this.keysDown.has('ShiftRight') ||
+      this.touchBoosting;
 
     // Clear edge triggers
     this.edgeLeft = false;
@@ -127,50 +176,75 @@ export class InputManager {
     this.keysDown.delete(e.code);
   };
 
-  // ── Touch / Swipe ─────────────────────────────
+  // ── Touch / Swipe (Mobile) ────────────────────
   private _onTouchStart = (e: TouchEvent): void => {
     if (e.touches.length === 0) return;
+
+    // Multi-touch (2 fingers down) = BOOST!
+    if (e.touches.length >= 2) {
+      this.touchBoosting = true;
+    }
+
     const t = e.touches[0]!;
     this.touchStartX = t.clientX;
     this.touchStartY = t.clientY;
     this.touchActive = true;
 
-    // Tap = action (play/retry)
-    this.edgeAction = true;
+    // Double-tap & hold anywhere = BOOST!
+    const now = performance.now();
+    if (now - this.lastTouchTime < 280) {
+      this.touchBoosting = true;
+    }
+    this.lastTouchTime = now;
 
-    // Tap-and-hold starts flying
-    this.keysDown.add('Space');
+    // Tap = action for menus / play / retry
+    this.edgeAction = true;
   };
 
   private _onTouchMove = (e: TouchEvent): void => {
     if (!this.touchActive || e.touches.length === 0) return;
-    e.preventDefault();
 
     const t = e.touches[0]!;
     const dx = t.clientX - this.touchStartX;
     const dy = t.clientY - this.touchStartY;
 
-    if (Math.abs(dx) > InputManager.SWIPE_THRESHOLD) {
-      if (dx < 0) this.edgeLeft = true;
-      else this.edgeRight = true;
-      // Reset origin to enable chained swipes without lifting finger
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+
+    // Dominant horizontal swipe -> LANE SWITCH ONLY (NO JUMP!)
+    if (absDx > absDy && absDx > InputManager.SWIPE_THRESHOLD) {
+      if (dx < 0) {
+        this.edgeLeft = true;
+      } else {
+        this.edgeRight = true;
+      }
       this.touchStartX = t.clientX;
       this.touchStartY = t.clientY;
-    } else if (dy > InputManager.SWIPE_THRESHOLD) {
-      this.edgeSlam = true;
-      this.touchStartX = t.clientX;
-      this.touchStartY = t.clientY;
-    } else if (dy < -InputManager.SWIPE_THRESHOLD) {
-      this.edgeAction = true;
-      this.keysDown.add('Space');
+    } 
+    // Dominant vertical swipe
+    else if (absDy > absDx && absDy > InputManager.SWIPE_THRESHOLD) {
+      if (dy < 0) {
+        // SWIPE UP -> JUMP & FLY!
+        this.touchFlying = true;
+      } else {
+        // SWIPE DOWN -> SLAM DIVE!
+        this.edgeSlam = true;
+        this.touchFlying = false;
+      }
       this.touchStartX = t.clientX;
       this.touchStartY = t.clientY;
     }
   };
 
-  private _onTouchEnd = (_e: TouchEvent): void => {
-    this.touchActive = false;
-    this.keysDown.delete('Space');
+  private _onTouchEnd = (e: TouchEvent): void => {
+    if (e.touches.length === 0) {
+      this.touchActive = false;
+      this.touchFlying = false;
+      this.touchBoosting = false;
+    } else if (e.touches.length === 1) {
+      // Released secondary finger
+      this.touchBoosting = false;
+    }
   };
 
   public dispose(): void {
@@ -179,5 +253,7 @@ export class InputManager {
     window.removeEventListener('touchstart', this._onTouchStart);
     window.removeEventListener('touchmove', this._onTouchMove);
     window.removeEventListener('touchend', this._onTouchEnd);
+    window.removeEventListener('touchcancel', this._onTouchEnd);
   }
 }
+
