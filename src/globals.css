@@ -1495,10 +1495,6 @@ html, body {
 }
 
 /* ── Media Queries ───────────────────── */
-.mobile-boost-btn {
-  display: none;
-}
-
 @media (min-width: 769px) {
   .mobile-guide {
     display: none !important;
@@ -1514,49 +1510,6 @@ html, body {
     display: flex !important;
     flex-direction: column;
     gap: var(--space-xs);
-  }
-
-  .mobile-boost-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: var(--space-md);
-    bottom: var(--space-md);
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(255, 73, 146, 0.45), rgba(11, 211, 211, 0.45));
-    border: 2px solid var(--color-ocean-cyan);
-    box-shadow: 0 0 16px rgba(11, 211, 211, 0.45);
-    color: var(--color-crisp-white);
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 1px;
-    cursor: pointer;
-    pointer-events: auto;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: none;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: transform var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
-    z-index: 15;
-  }
-
-  .mobile-boost-btn:active,
-  .mobile-boost-btn.active {
-    transform: scale(0.9);
-    background: linear-gradient(135deg, var(--color-hot-pink), var(--color-ocean-cyan));
-    box-shadow: 0 0 24px rgba(255, 73, 146, 0.85);
-  }
-
-  .mobile-boost-btn .boost-ico {
-    font-size: 22px;
-    line-height: 1;
-    margin-bottom: 2px;
   }
 
   /* ── Mobile Main Menu Optimization ── */

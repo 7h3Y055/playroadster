@@ -53,8 +53,10 @@ export class InputManager {
   private touchFlying = false;
   private touchBoosting = false;
   private lastTouchTime = 0;
+  private longPressTimer: number | null = null;
 
   private static readonly SWIPE_THRESHOLD = 26; // px
+  private static readonly LONG_PRESS_DELAY = 220; // ms to activate rocket boost on hold
 
   constructor() {
     window.addEventListener('keydown', this._onKeyDown);
@@ -63,43 +65,6 @@ export class InputManager {
     window.addEventListener('touchmove', this._onTouchMove, { passive: false });
     window.addEventListener('touchend', this._onTouchEnd, { passive: false });
     window.addEventListener('touchcancel', this._onTouchEnd, { passive: false });
-
-    // Wire on-screen mobile boost button if present
-    this._initMobileBoostButton();
-  }
-
-  private _initMobileBoostButton(): void {
-    const attach = () => {
-      const btn = document.getElementById('mobile-boost-btn');
-      if (!btn) return;
-
-      const startBoost = (e: Event) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.touchBoosting = true;
-        btn.classList.add('active');
-      };
-
-      const stopBoost = (e: Event) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.touchBoosting = false;
-        btn.classList.remove('active');
-      };
-
-      btn.addEventListener('touchstart', startBoost, { passive: false });
-      btn.addEventListener('touchend', stopBoost, { passive: false });
-      btn.addEventListener('touchcancel', stopBoost, { passive: false });
-      btn.addEventListener('mousedown', startBoost);
-      btn.addEventListener('mouseup', stopBoost);
-      btn.addEventListener('mouseleave', stopBoost);
-    };
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', attach);
-    } else {
-      attach();
-    }
   }
 
   /**
@@ -197,6 +162,19 @@ export class InputManager {
     }
     this.lastTouchTime = now;
 
+    // Clear any pending long-press timer
+    if (this.longPressTimer !== null) {
+      window.clearTimeout(this.longPressTimer);
+      this.longPressTimer = null;
+    }
+
+    // Long press: holding finger down for >= 220ms activates boost
+    this.longPressTimer = window.setTimeout(() => {
+      if (this.touchActive && !this.touchFlying) {
+        this.touchBoosting = true;
+      }
+    }, InputManager.LONG_PRESS_DELAY);
+
     // Tap = action for menus / play / retry
     this.edgeAction = true;
   };
@@ -212,6 +190,7 @@ export class InputManager {
     const absDy = Math.abs(dy);
 
     // Dominant horizontal swipe -> LANE SWITCH ONLY (NO JUMP!)
+    // Note: if user is already long-press boosting, allow lane steering while boosting!
     if (absDx > absDy && absDx > InputManager.SWIPE_THRESHOLD) {
       if (dx < 0) {
         this.edgeLeft = true;
@@ -224,12 +203,22 @@ export class InputManager {
     // Dominant vertical swipe
     else if (absDy > absDx && absDy > InputManager.SWIPE_THRESHOLD) {
       if (dy < 0) {
-        // SWIPE UP -> JUMP & FLY!
+        // SWIPE UP -> JUMP & FLY! (Cancel boost timer so vertical jump doesn't conflict)
         this.touchFlying = true;
+        this.touchBoosting = false;
+        if (this.longPressTimer !== null) {
+          window.clearTimeout(this.longPressTimer);
+          this.longPressTimer = null;
+        }
       } else {
         // SWIPE DOWN -> SLAM DIVE!
         this.edgeSlam = true;
         this.touchFlying = false;
+        this.touchBoosting = false;
+        if (this.longPressTimer !== null) {
+          window.clearTimeout(this.longPressTimer);
+          this.longPressTimer = null;
+        }
       }
       this.touchStartX = t.clientX;
       this.touchStartY = t.clientY;
@@ -237,6 +226,12 @@ export class InputManager {
   };
 
   private _onTouchEnd = (e: TouchEvent): void => {
+    // Clear long press timer whenever touch ends
+    if (this.longPressTimer !== null) {
+      window.clearTimeout(this.longPressTimer);
+      this.longPressTimer = null;
+    }
+
     if (e.touches.length === 0) {
       this.touchActive = false;
       this.touchFlying = false;
@@ -248,6 +243,10 @@ export class InputManager {
   };
 
   public dispose(): void {
+    if (this.longPressTimer !== null) {
+      window.clearTimeout(this.longPressTimer);
+      this.longPressTimer = null;
+    }
     window.removeEventListener('keydown', this._onKeyDown);
     window.removeEventListener('keyup', this._onKeyUp);
     window.removeEventListener('touchstart', this._onTouchStart);
