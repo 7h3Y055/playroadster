@@ -106,8 +106,8 @@
 
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7506557022815222" crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="./assets/index-Dbp5cHca.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BGeK1puO.css">
+    <script type="module" crossorigin src="./assets/index-fqJYdzDI.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DOD4CwHI.css">
   </head>
   <body>
     <!-- Fallback for search engine crawlers without JavaScript -->
@@ -214,6 +214,11 @@
             <span class="key-hint"><kbd>↓</kbd> Slam</span>
             <span class="key-hint"><kbd>Shift</kbd> Hold to boost</span>
           </div>
+          <!-- Mobile Boost Pedal Button -->
+          <button id="mobile-boost-btn" class="mobile-boost-btn" aria-label="Hold to Boost">
+            <span class="boost-ico">⚡</span>
+            <span class="boost-txt">BOOST</span>
+          </button>
         </div>
 
         <div id="center-text"></div>
@@ -225,11 +230,17 @@
       <!-- ── Start Guide (Controls during countdown) ── -->
       <div id="start-guide" class="start-guide" aria-hidden="true">
         <div class="guide-title">Controls</div>
-        <ul class="guide-rows">
+        <ul class="guide-rows desktop-guide">
           <li><span class="keys"><kbd>←</kbd><kbd>→</kbd></span><span>Change lane</span></li>
           <li><span class="keys"><kbd>↑</kbd><kbd class="wide">Space</kbd></span><span>Jump · hold to fly</span></li>
           <li><span class="keys"><kbd>↓</kbd></span><span>Slam</span></li>
           <li><span class="keys"><kbd class="wide">Shift</kbd></span><span>Hold to boost</span></li>
+        </ul>
+        <ul class="guide-rows mobile-guide">
+          <li><span class="keys"><kbd>Swipe ← →</kbd></span><span>Change lane</span></li>
+          <li><span class="keys"><kbd>Swipe ↑</kbd></span><span>Jump · hold to fly</span></li>
+          <li><span class="keys"><kbd>Swipe ↓</kbd></span><span>Slam dive</span></li>
+          <li><span class="keys"><kbd class="wide">⚡ Button</kbd></span><span>Hold to boost</span></li>
         </ul>
       </div>
 
