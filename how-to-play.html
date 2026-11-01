@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Play Roadster Dash — Complete Game Guide & Strategy</title>
+  <meta name="description" content="Master Roadster Dash with our complete game guide: desktop and mobile controls, SpaceX cold-gas thruster physics, token multipliers, obstacles, and pro high-score strategies." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://play-roadster.live/how-to-play.html" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7506557022815222" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #0C0A18;
+      --card-bg: rgba(19, 15, 38, 0.92);
+      --text: #FDFBF9;
+      --text-muted: rgba(253, 251, 249, 0.72);
+      --accent: #0BD3D3;
+      --accent-pink: #FF4992;
+      --accent-yellow: #FFEE66;
+      --border: rgba(255, 255, 255, 0.12);
+      --font-display: 'Rajdhani', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 44px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(11, 211, 211, 0.15);
+      flex: 1;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--accent-pink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 1.5px;
+      background: linear-gradient(135deg, #FDFBF9 0%, var(--accent) 50%, var(--accent-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent-yellow);
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 36px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-left: 3px solid var(--accent-pink);
+      padding-left: 12px;
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--accent-yellow);
+      margin: 20px 0 10px;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      font-size: 16px;
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    ul, ol {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      padding-left: 24px;
+      font-size: 15px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    /* Controls Tables */
+    .controls-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0 30px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .controls-table th, 
+    .controls-table td {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 15px;
+    }
+
+    .controls-table th {
+      background: rgba(11, 211, 211, 0.15);
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .controls-table tr:not(:last-child) td {
+      border-bottom: 1px solid var(--border);
+    }
+
+    kbd {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent-yellow);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+    }
+
+    .tip-box {
+      background: rgba(11, 211, 211, 0.08);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 24px 0;
+    }
+
+    .tip-box h4 {
+      font-family: var(--font-display);
+      color: var(--accent);
+      font-size: 17px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .tip-box p {
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+
+    .btn-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-yellow));
+      color: #0C0A18;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 2px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      margin-top: 30px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(255, 73, 146, 0.5);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: 48px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 24px 18px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      .site-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="site-nav" aria-label="Main Navigation">
+      <a href="/" class="brand">ROADSTER <span>DASH</span></a>
+      <ul class="nav-links">
+        <li><a href="/">Game</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/how-to-play.html" class="active">How to Play</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1>How to Play Roadster Dash</h1>
+      <div class="subtitle">Official Gameplay Manual · Mechanics, Controls & High-Score Strategies</div>
+
+      <p>
+        Welcome to the official driver manual for <strong>Roadster Dash</strong>. Whether you are playing on a desktop with a mechanical keyboard or on your phone with touch swipe gestures, this guide will teach you the fundamentals of supersonic lane shifting, thruster energy management, combo multipliers, and survival techniques.
+      </p>
+
+      <h2>1. The Objective</h2>
+      <p>
+        Your goal is simple yet demanding: survive as long as possible down the vibrant 4-lane neon causeway, dodge oncoming obstacles, leap over bumper-to-bumper traffic using cold-gas thrusters, collect high-value gold career tokens, and achieve the highest distance and score possible.
+      </p>
+
+      <h2>2. Complete Controls Reference</h2>
+      
+      <h3>Desktop Keyboard Controls</h3>
+      <table class="controls-table" aria-label="Desktop Controls Table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Primary Key</th>
+            <th>Alternative Key</th>
+            <th>Function</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Lane Left</strong></td>
+            <td><kbd>←</kbd> (Left Arrow)</td>
+            <td><kbd>A</kbd></td>
+            <td>Quick snap to the left highway lane</td>
+          </tr>
+          <tr>
+            <td><strong>Lane Right</strong></td>
+            <td><kbd>→</kbd> (Right Arrow)</td>
+            <td><kbd>D</kbd></td>
+            <td>Quick snap to the right highway lane</td>
+          </tr>
+          <tr>
+            <td><strong>Jump & Hover</strong></td>
+            <td><kbd>Space</kbd></td>
+            <td><kbd>↑</kbd> or <kbd>W</kbd></td>
+            <td>Ignite thrusters to launch into the air; hold to hover</td>
+          </tr>
+          <tr>
+            <td><strong>Dive Slam</strong></td>
+            <td><kbd>↓</kbd> (Down Arrow)</td>
+            <td><kbd>S</kbd></td>
+            <td>Fast vertical slam to immediately return to the asphalt</td>
+          </tr>
+          <tr>
+            <td><strong>Rocket Boost</strong></td>
+            <td><kbd>Shift</kbd> (Left/Right)</td>
+            <td>—</td>
+            <td>Hold to engage maximum cold-gas acceleration</td>
+          </tr>
+          <tr>
+            <td><strong>Pause Game</strong></td>
+            <td><kbd>P</kbd></td>
+            <td><kbd>Esc</kbd></td>
+            <td>Toggle pause overlay</td>
+          </tr>
+          <tr>
+            <td><strong>Mute Audio</strong></td>
+            <td><kbd>M</kbd></td>
+            <td>—</td>
+            <td>Toggle music and sound effects</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Mobile Touch & Gesture Controls</h3>
+      <table class="controls-table" aria-label="Mobile Controls Table">
+        <thead>
+          <tr>
+            <th>Gesture</th>
+            <th>Action</th>
+            <th>Pro Driver Tip</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Swipe Left / Right</strong></td>
+            <td>Change Lane</td>
+            <td>Quick horizontal flick switches lanes instantly without jumping</td>
+          </tr>
+          <tr>
+            <td><strong>Swipe Up</strong></td>
+            <td>Jump & Thruster Flight</td>
+            <td>Swipe up to jump; maintain contact to hover above traffic</td>
+          </tr>
+          <tr>
+            <td><strong>Swipe Down</strong></td>
+            <td>Dive Slam</td>
+            <td>Slam back down to land precisely on ramps or grab tokens</td>
+          </tr>
+          <tr>
+            <td><strong>Long Press & Hold</strong></td>
+            <td>Rocket Boost</td>
+            <td>Hold your finger down anywhere for ≥220ms to activate supersonic speed. You can slide left/right while boosting!</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>3. Authentic Cold-Gas Thruster Dynamics</h2>
+      <p>
+        The centerpiece of the Tesla Roadster's handling is its <strong>SpaceX Cold-Gas Thruster System</strong>. Mounted behind the license plate and beneath the chassis, these composite overwrapped pressure vessels (COPV) release compressed nitrogen gas for instantaneous vertical lift.
+      </p>
+      <ul>
+        <li><strong>Air Tank Gauge:</strong> Your HUD displays an <strong>AIR</strong> meter that drains while thrusters fire.</li>
+        <li><strong>Automatic Recharge:</strong> Once you touch back down on the road, your onboard compressor rapidly refills the cold-gas pressure tank to 100%.</li>
+        <li><strong>Precision Dive Slam:</strong> If you are floating in the air and see an upcoming bridge or airborne obstacle, press <kbd>↓</kbd> or swipe down to slam back to ground level immediately.</li>
+      </ul>
+
+      <h2>4. Scoring, Combos & Multipliers</h2>
+      <p>
+        Your total score is a combination of distance covered, speed scaling, near-miss bonuses, and token collection:
+      </p>
+      <ul>
+        <li><strong>Distance Points:</strong> Points tick up continuously as you hurtle forward. The faster your car moves, the more points awarded per meter.</li>
+        <li><strong>Near-Miss Combos:</strong> Passing within inches of a sports sedan or truck without colliding triggers a <strong>NEAR MISS</strong> combo multiplier (×2, ×3, up to ×5!).</li>
+        <li><strong>Fever Mode:</strong> Chaining combos fills your <strong>ROCKET FEVER</strong> gauge. When full, you achieve temporary invincibility and supersonic speed.</li>
+      </ul>
+
+      <h2>5. Obstacle Catalog</h2>
+      <p>
+        The Miami causeway is populated with diverse traffic patterns:
+      </p>
+      <ul>
+        <li><strong>Sports Sedans:</strong> Fast-moving cruisers that switch lanes dynamically.</li>
+        <li><strong>Delivery Vans & Taxis:</strong> Slower vehicles that form walls across multiple lanes. Jump over them!</li>
+        <li><strong>Heavy Semi-Trucks:</strong> Long vehicles that require a full thruster hover to clear from bumper to cab.</li>
+        <li><strong>Highway Ramps:</strong> Yellow launch wedges that catapult you high into the air, enabling massive stunt combos and bonus tokens.</li>
+      </ul>
+
+      <div class="tip-box">
+        <h4>⚡ Pro Driver Secret</h4>
+        <p>
+          Always preserve at least 25% of your AIR gauge for emergency evasions. If two lanes are blocked by semi-trucks, a quick thruster jump is the only way to avoid a fatal crash!
+        </p>
+      </div>
+
+      <a href="/" class="btn-play">▶ LAUNCH ROADSTER DASH & PLAY NOW</a>
+    </main>
+
+    <footer>
+      <p>© 2026 Roadster Dash (play-roadster.live) · Created by Youssef Bouchmama</p>
+      <p style="margin-top: 6px;">
+        <a href="/about.html">About</a> · 
+        <a href="/how-to-play.html">How to Play</a> · 
+        <a href="/faq.html">FAQ</a> · 
+        <a href="/terms.html">Terms of Service</a> · 
+        <a href="/privacy.html">Privacy Policy</a> · 
+        <a href="/contact.html">Contact Us</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

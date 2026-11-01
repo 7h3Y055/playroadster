@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frequently Asked Questions (FAQ) — Roadster Dash</title>
+  <meta name="description" content="Answers to common questions about Roadster Dash: browser compatibility, performance settings, physics realism, device support, and gameplay controls." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://play-roadster.live/faq.html" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7506557022815222" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #0C0A18;
+      --card-bg: rgba(19, 15, 38, 0.92);
+      --text: #FDFBF9;
+      --text-muted: rgba(253, 251, 249, 0.72);
+      --accent: #0BD3D3;
+      --accent-pink: #FF4992;
+      --accent-yellow: #FFEE66;
+      --border: rgba(255, 255, 255, 0.12);
+      --font-display: 'Rajdhani', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 44px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(11, 211, 211, 0.15);
+      flex: 1;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--accent-pink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 1.5px;
+      background: linear-gradient(135deg, #FDFBF9 0%, var(--accent) 50%, var(--accent-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent-yellow);
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .faq-question {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .faq-answer {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    .faq-answer strong {
+      color: var(--text);
+    }
+
+    .btn-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-yellow));
+      color: #0C0A18;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 2px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      margin-top: 30px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(255, 73, 146, 0.5);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: 48px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 24px 18px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      .site-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="site-nav" aria-label="Main Navigation">
+      <a href="/" class="brand">ROADSTER <span>DASH</span></a>
+      <ul class="nav-links">
+        <li><a href="/">Game</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/how-to-play.html">How to Play</a></li>
+        <li><a href="/faq.html" class="active">FAQ</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1>Frequently Asked Questions</h1>
+      <div class="subtitle">Everything You Need to Know About Roadster Dash</div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">1. What is Roadster Dash?</h2>
+        <p class="faq-answer">
+          Roadster Dash is a free, high-speed 3D endless runner set on a neon-drenched Miami causeway. Inspired by the concept of the Tesla Roadster equipped with SpaceX cold-gas thrusters, you pilot the vehicle through dense traffic, jump over obstacles, hover above semi-trucks, and collect career tokens.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">2. Is Roadster Dash free to play?</h2>
+        <p class="faq-answer">
+          <strong>Yes, 100% free!</strong> There are no pay-to-win mechanics, no subscriptions, and no microtransactions. Anyone can play immediately in their web browser.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">3. What devices and browsers are supported?</h2>
+        <p class="faq-answer">
+          Roadster Dash works on almost any modern device with a WebGL-compatible browser:
+          <br />• <strong>Mobile:</strong> iOS Safari (iPhone / iPad), Android Chrome, Firefox Mobile, Samsung Internet.
+          <br />• <strong>Desktop:</strong> Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge, Brave, and Opera on Windows, macOS, and Linux.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">4. How do the cold-gas thrusters work?</h2>
+        <p class="faq-answer">
+          In real aerospace engineering, cold-gas thrusters expand compressed inert gas (such as nitrogen) through supersonic nozzles to produce clean thrust without combustion. In Roadster Dash, pressing <kbd>Space</kbd> (or swiping up on mobile) fires these thrusters, letting you jump and hover above ground traffic until your air tank depletes. Touching down automatically re-pressurizes the system!
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">5. How do I boost on mobile devices?</h2>
+        <p class="faq-answer">
+          On touchscreens, simply <strong>press and hold anywhere on the screen for 220ms</strong>. Your Roadster will ignite its cold-gas booster. While holding to boost, you can freely slide your finger left or right to steer between lanes without losing momentum!
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">6. What do the 4 Graphics Quality modes do?</h2>
+        <p class="faq-answer">
+          Accessible directly from the main menu:
+          <br />• <strong>LOW (Perf):</strong> Optimized for older smartphones and battery conservation (disables bloom, shadows, and reduces particle counts).
+          <br />• <strong>MID (Balanced):</strong> Great balance of smooth 60 FPS performance and vibrant neon lighting.
+          <br />• <strong>HIGH (Retina):</strong> Full post-processing, bloom, motion blur, and ambient car shadows for modern laptops and flagship phones.
+          <br />• <strong>ULTRA (4K Max):</strong> Maximum render resolution, antialiasing, and reflections for gaming monitors and desktop rigs.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">7. Does the game save my high score and career tokens?</h2>
+        <p class="faq-answer">
+          <strong>Yes.</strong> Your personal best distance, high score, career tokens collected, and sound/graphics settings are automatically stored locally in your browser's LocalStorage. If you return tomorrow or next week, your career records will be waiting for you.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">8. Can I install Roadster Dash as an App?</h2>
+        <p class="faq-answer">
+          Yes! Roadster Dash is a Progressive Web App (PWA). On mobile, tap <strong>Share → Add to Home Screen</strong> (iOS Safari) or the <strong>Install App</strong> prompt (Android Chrome) to launch it in full-screen immersion without browser address bars.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">9. Is Roadster Dash affiliated with Tesla or SpaceX?</h2>
+        <p class="faq-answer">
+          No. Roadster Dash is an independent fan tribute and creative arcade game developed by Youssef Bouchmama. All vehicle concepts and SpaceX references are parodic and celebratory tributes to futuristic automotive and aerospace technology.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">10. How can I report bugs or suggest new features?</h2>
+        <p class="faq-answer">
+          We welcome player feedback! You can open an issue or feature request on our official <a href="https://github.com/7h3Y055/playroadster" target="_blank" rel="noopener">GitHub repository</a> or contact us directly via our <a href="/contact.html">Contact Page</a>.
+        </p>
+      </div>
+
+      <a href="/" class="btn-play">▶ RETURN TO GAME & RACE</a>
+    </main>
+
+    <footer>
+      <p>© 2026 Roadster Dash (play-roadster.live) · Created by Youssef Bouchmama</p>
+      <p style="margin-top: 6px;">
+        <a href="/about.html">About</a> · 
+        <a href="/how-to-play.html">How to Play</a> · 
+        <a href="/faq.html">FAQ</a> · 
+        <a href="/terms.html">Terms of Service</a> · 
+        <a href="/privacy.html">Privacy Policy</a> · 
+        <a href="/contact.html">Contact Us</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

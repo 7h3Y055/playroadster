@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — Roadster Dash Support</title>
+  <meta name="description" content="Get in touch with the developer of Roadster Dash. Submit feedback, bug reports, feature requests, or business inquiries." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://play-roadster.live/contact.html" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7506557022815222" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #0C0A18;
+      --card-bg: rgba(19, 15, 38, 0.92);
+      --text: #FDFBF9;
+      --text-muted: rgba(253, 251, 249, 0.72);
+      --accent: #0BD3D3;
+      --accent-pink: #FF4992;
+      --accent-yellow: #FFEE66;
+      --border: rgba(255, 255, 255, 0.12);
+      --font-display: 'Rajdhani', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 44px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(11, 211, 211, 0.15);
+      flex: 1;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--accent-pink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 1.5px;
+      background: linear-gradient(135deg, #FDFBF9 0%, var(--accent) 50%, var(--accent-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent-yellow);
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 32px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-left: 3px solid var(--accent-pink);
+      padding-left: 12px;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      font-size: 16px;
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    .contact-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+      margin: 28px 0;
+    }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .contact-card h3 {
+      font-family: var(--font-display);
+      font-size: 19px;
+      color: var(--accent-yellow);
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-card a {
+      color: var(--accent);
+      word-break: break-all;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    .response-badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: rgba(11, 211, 211, 0.12);
+      border: 1px solid var(--accent);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .btn-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-yellow));
+      color: #0C0A18;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 2px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      margin-top: 30px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(255, 73, 146, 0.5);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: 48px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 24px 18px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      .site-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="site-nav" aria-label="Main Navigation">
+      <a href="/" class="brand">ROADSTER <span>DASH</span></a>
+      <ul class="nav-links">
+        <li><a href="/">Game</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/how-to-play.html">How to Play</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1>Contact Us</h1>
+      <div class="subtitle">Developer Inquiries, Bug Reports & Player Feedback</div>
+
+      <p>
+        Have a question, feedback, or a cool feature idea for <strong>Roadster Dash</strong>? We would love to hear from you. You can reach out directly via our developer channels below:
+      </p>
+
+      <div class="contact-card-grid">
+        <div class="contact-card">
+          <h3>Direct Email Support</h3>
+          <p>For gameplay issues, business inquiries, or privacy concerns:</p>
+          <a href="mailto:youssefbouchmama18@outlook.com">youssefbouchmama18@outlook.com</a>
+          <div class="response-badge">⏱ Response within 24-48h</div>
+        </div>
+
+        <div class="contact-card">
+          <h3>GitHub Repository</h3>
+          <p>For open-source code discussions, technical issues, and bug reports:</p>
+          <a href="https://github.com/7h3Y055/playroadster/issues" target="_blank" rel="noopener">github.com/7h3Y055/playroadster/issues</a>
+          <div class="response-badge">🛠 Public Tracker</div>
+        </div>
+
+        <div class="contact-card">
+          <h3>Itch.io Community</h3>
+          <p>Join the conversation and discuss scores with indie gamers on itch.io:</p>
+          <a href="https://itch.io" target="_blank" rel="noopener">Roadster Dash on itch.io</a>
+          <div class="response-badge">🎮 Community Forum</div>
+        </div>
+      </div>
+
+      <h2>Reporting a Bug?</h2>
+      <p>
+        To help us diagnose and fix issues as quickly as possible, please include:
+      </p>
+      <ul style="color: var(--text-muted); padding-left: 24px; font-size: 15px;">
+        <li>Your device model (e.g., iPhone 15 Pro, Samsung Galaxy S23, M2 MacBook Pro)</li>
+        <li>Your browser version (e.g., iOS Safari 17.4, Chrome 124)</li>
+        <li>Your active graphics quality setting (Low, Mid, High, Ultra)</li>
+        <li>A brief description of what happened and steps to reproduce</li>
+      </ul>
+
+      <a href="/" class="btn-play">← BACK TO ROADSTER DASH</a>
+    </main>
+
+    <footer>
+      <p>© 2026 Roadster Dash (play-roadster.live) · Created by Youssef Bouchmama</p>
+      <p style="margin-top: 6px;">
+        <a href="/about.html">About</a> · 
+        <a href="/how-to-play.html">How to Play</a> · 
+        <a href="/faq.html">FAQ</a> · 
+        <a href="/terms.html">Terms of Service</a> · 
+        <a href="/privacy.html">Privacy Policy</a> · 
+        <a href="/contact.html">Contact Us</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
