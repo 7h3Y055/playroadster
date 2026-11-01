@@ -6,19 +6,23 @@
   <title>Privacy Policy — Roadster Dash</title>
   <meta name="description" content="Privacy Policy for Roadster Dash (play-roadster.live), explaining data practices and third-party advertising partners." />
   <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://play-roadster.live/privacy.html" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7506557022815222" crossorigin="anonymous"></script>
   <style>
     :root {
       --bg: #0C0A18;
-      --card-bg: rgba(19, 15, 38, 0.9);
+      --card-bg: rgba(19, 15, 38, 0.92);
       --text: #FDFBF9;
-      --text-muted: rgba(253, 251, 249, 0.7);
+      --text-muted: rgba(253, 251, 249, 0.72);
       --accent: #0BD3D3;
       --accent-pink: #FF4992;
-      --border: rgba(255, 255, 255, 0.1);
+      --accent-yellow: #FFEE66;
+      --border: rgba(255, 255, 255, 0.12);
       --font-display: 'Rajdhani', sans-serif;
       --font-mono: 'Share Tech Mono', monospace;
     }
@@ -33,72 +37,122 @@
       background-color: var(--bg);
       color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      padding: 32px 16px;
+      line-height: 1.7;
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 860px;
+      width: 100%;
       margin: 0 auto;
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 40px;
+      border-radius: 18px;
+      padding: 44px;
       backdrop-filter: blur(16px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(11, 211, 211, 0.15);
+      flex: 1;
     }
 
-    header {
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 24px;
+      padding-bottom: 20px;
       margin-bottom: 32px;
     }
 
     .brand {
       font-family: var(--font-display);
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 700;
       letter-spacing: 2px;
       color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 8px;
+      text-decoration: none;
     }
 
     .brand span {
       color: var(--accent-pink);
     }
 
-    h1 {
-      font-family: var(--font-display);
-      font-size: 32px;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      list-style: none;
     }
 
-    .date {
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 1.5px;
+      background: linear-gradient(135deg, #FDFBF9 0%, var(--accent) 50%, var(--accent-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
       font-family: var(--font-mono);
       font-size: 14px;
-      color: var(--text-muted);
+      color: var(--accent-yellow);
+      margin-bottom: 28px;
+      letter-spacing: 1px;
     }
 
     h2 {
       font-family: var(--font-display);
       font-size: 22px;
+      font-weight: 700;
       color: var(--accent);
-      margin-top: 28px;
+      margin-top: 32px;
       margin-bottom: 12px;
       text-transform: uppercase;
       letter-spacing: 1px;
+      border-left: 3px solid var(--accent-pink);
+      padding-left: 12px;
     }
 
-    p, ul {
+    p {
       color: var(--text-muted);
       margin-bottom: 16px;
       font-size: 15px;
     }
 
+    strong {
+      color: var(--text);
+    }
+
     ul {
+      color: var(--text-muted);
+      margin-bottom: 20px;
       padding-left: 24px;
+      font-size: 15px;
     }
 
     li {
@@ -107,54 +161,83 @@
 
     a {
       color: var(--accent);
-      text-decoration: underline;
     }
 
-    a:hover {
-      color: var(--accent-pink);
-    }
-
-    .back-btn {
+    .btn-play {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 32px;
-      padding: 12px 24px;
-      background: var(--accent);
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-yellow));
       color: #0C0A18;
       text-decoration: none;
       font-family: var(--font-display);
       font-weight: 700;
-      letter-spacing: 1.5px;
-      border-radius: 8px;
-      transition: transform 0.15s ease, background 0.15s ease;
+      font-size: 16px;
+      letter-spacing: 2px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      margin-top: 30px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .back-btn:hover {
-      background: #67E7D6;
-      color: #0C0A18;
+    .btn-play:hover {
       transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(255, 73, 146, 0.5);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: 48px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
 
     @media (max-width: 600px) {
       .container {
-        padding: 24px 20px;
+        padding: 24px 18px;
       }
       h1 {
-        font-size: 26px;
+        font-size: 28px;
+      }
+      .site-nav {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
-      <div class="brand">ROADSTER <span>DASH</span></div>
-      <h1>Privacy Policy</h1>
-      <div class="date">Last updated: October 22, 2026 · play-roadster.live</div>
-    </header>
+    <nav class="site-nav" aria-label="Main Navigation">
+      <a href="/" class="brand">ROADSTER <span>DASH</span></a>
+      <ul class="nav-links">
+        <li><a href="/">Game</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/how-to-play.html">How to Play</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+        <li><a href="/privacy.html" class="active">Privacy</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
 
     <main>
+      <h1>Privacy Policy</h1>
+      <div class="subtitle">Effective Date: November 1, 2026 · play-roadster.live</div>
+
       <p>
         Welcome to <strong>Roadster Dash</strong> ("play-roadster.live", "we", "our", or "us"). We respect your privacy and are committed to protecting it. This Privacy Policy describes how information is collected, used, and safeguarded when you visit and play our web game.
       </p>
@@ -168,7 +251,7 @@
         <li><strong>Technical & Device Data:</strong> Like most web applications, our hosting infrastructure may automatically receive basic technical information such as your browser type, device operating system, language preference, and IP address for site stability and security.</li>
       </ul>
 
-      <h2>2. Third-Party Advertising & Cookies</h2>
+      <h2>2. Third-Party Advertising & Cookies (Google AdSense)</h2>
       <p>
         We use third-party advertising partners, notably <strong>Google AdSense</strong>, to serve advertisements when you visit our website.
       </p>
@@ -190,16 +273,28 @@
 
       <h2>5. Changes to This Policy</h2>
       <p>
-        We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated "Last updated" date.
+        We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated "Effective Date".
       </p>
 
       <h2>6. Contact Us</h2>
       <p>
-        If you have any questions or feedback about this Privacy Policy or Roadster Dash, please reach out via GitHub at <a href="https://github.com/7h3Y055/playroadster" target="_blank" rel="noopener">github.com/7h3Y055/playroadster</a>.
+        If you have any questions or feedback about this Privacy Policy or Roadster Dash, please reach out via our <a href="/contact.html">Contact Page</a> or on GitHub at <a href="https://github.com/7h3Y055/playroadster" target="_blank" rel="noopener">github.com/7h3Y055/playroadster</a>.
       </p>
 
-      <a href="/" class="back-btn">← RETURN TO GAME</a>
+      <a href="/" class="btn-play">← RETURN TO GAME</a>
     </main>
+
+    <footer>
+      <p>© 2026 Roadster Dash (play-roadster.live) · Created by Youssef Bouchmama</p>
+      <p style="margin-top: 6px;">
+        <a href="/about.html">About</a> · 
+        <a href="/how-to-play.html">How to Play</a> · 
+        <a href="/faq.html">FAQ</a> · 
+        <a href="/terms.html">Terms of Service</a> · 
+        <a href="/privacy.html">Privacy Policy</a> · 
+        <a href="/contact.html">Contact Us</a>
+      </p>
+    </footer>
   </div>
 </body>
 </html>

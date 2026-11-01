@@ -891,14 +891,15 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--space-md);
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-sm);
   margin-top: var(--space-xs);
 }
 
 .legal-link {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   color: var(--text-muted);
   text-decoration: none;
   text-transform: uppercase;
@@ -908,6 +909,11 @@ html, body {
 .legal-link:hover {
   color: var(--color-ocean-cyan);
   text-decoration: underline;
+}
+
+.legal-dot {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 11px;
 }
 
 /* ── Game Over Card ──────────────────── */

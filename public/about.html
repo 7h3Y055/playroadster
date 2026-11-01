@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Roadster Dash — 3D Cyberpunk Highway Runner</title>
+  <meta name="description" content="Learn about Roadster Dash, the high-octane 3D browser highway runner powered by WebGL Three.js and inspired by next-gen electric hypercars and SpaceX cold-gas thrusters." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://play-roadster.live/about.html" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7506557022815222" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #0C0A18;
+      --card-bg: rgba(19, 15, 38, 0.92);
+      --text: #FDFBF9;
+      --text-muted: rgba(253, 251, 249, 0.72);
+      --accent: #0BD3D3;
+      --accent-pink: #FF4992;
+      --accent-yellow: #FFEE66;
+      --border: rgba(255, 255, 255, 0.12);
+      --font-display: 'Rajdhani', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 44px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(11, 211, 211, 0.15);
+      flex: 1;
+    }
+
+    /* Site Navigation */
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: var(--accent-pink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 1.5px;
+      background: linear-gradient(135deg, #FDFBF9 0%, var(--accent) 50%, var(--accent-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent-yellow);
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 36px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-left: 3px solid var(--accent-pink);
+      padding-left: 12px;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      font-size: 16px;
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    ul {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      padding-left: 24px;
+      font-size: 15px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin: 28px 0;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      color: var(--accent-yellow);
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    .actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .btn-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-yellow));
+      color: #0C0A18;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 2px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(255, 73, 146, 0.5);
+    }
+
+    .btn-guide {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 2px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      transition: all 0.15s ease;
+    }
+
+    .btn-guide:hover {
+      background: rgba(11, 211, 211, 0.15);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: 48px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 24px 18px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      .site-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="site-nav" aria-label="Main Navigation">
+      <a href="/" class="brand">ROADSTER <span>DASH</span></a>
+      <ul class="nav-links">
+        <li><a href="/">Game</a></li>
+        <li><a href="/about.html" class="active">About</a></li>
+        <li><a href="/how-to-play.html">How to Play</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1>About Roadster Dash</h1>
+      <div class="subtitle">Next-Generation 3D Browser Highway Runner · WebGL & Three.js</div>
+
+      <p>
+        <strong>Roadster Dash</strong> is an adrenaline-fueled 3D endless runner playable directly in your web browser with zero installs or downloads. Set along a neon-soaked, retro-futuristic Miami causeway at dusk, players take the helm of a futuristic electric sports car outfitted with authentic SpaceX cold-gas thrusters, maneuvering through high-speed traffic, performing aerial hover stunts, and setting high score records.
+      </p>
+
+      <h2>The Inspiration</h2>
+      <p>
+        Roadster Dash was born out of a passion for high-speed arcade racing, 1980s synthwave aesthetics, and the frontier of aerospace engineering. Inspired by Elon Musk's legendary announcement of the Tesla Roadster SpaceX Package—featuring high-pressure air thrusters capable of dramatic acceleration and short hops—Roadster Dash turns that concept into an exhilarating, fast-paced arcade reality.
+      </p>
+      <p>
+        Unlike conventional lane-runners that limit players to purely 2D horizontal movement, Roadster Dash incorporates true verticality. Using an authentic 10-nozzle cold-gas thruster flight simulation, you can jump over multi-car pileups, hover over cruising semi-trucks, and execute precision dive-slams onto highway ramps.
+      </p>
+
+      <h2>Core Game Engine & Architecture</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Custom 3D WebGL Engine</h3>
+          <p>Built using modern Three.js and Vite, rendering dynamic lighting, neon road reflections, and procedural synthwave palm trees at a locked 60 FPS.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Cold-Gas Physics Simulation</h3>
+          <p>Authentic thruster thrust, gravity falloff, and mid-air hover dynamics driven by fixed-step physics integration for responsive, tactile controls.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Universal Device Optimization</h3>
+          <p>Engineered for seamless play across iOS Safari, Android Chrome, Windows, and Mac with fluid swipe gestures, keyboard mapping, and 4 graphics modes.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Zero-Install Web App</h3>
+          <p>Full Progressive Web App (PWA) support allowing you to install Roadster Dash directly to your home screen and play in full-screen immersion.</p>
+        </div>
+      </div>
+
+      <h2>Creator & Mission</h2>
+      <p>
+        Roadster Dash is created and actively maintained by <strong>Youssef Bouchmama</strong>. The mission behind the project is to prove that modern web technologies (WebGL, Web Audio API, TypeScript) can deliver console-quality arcade experiences instantly in the browser without friction, paywalls, or multi-gigabyte app downloads.
+      </p>
+      <p>
+        We believe in open web standards, transparent privacy, and fast, accessible gaming for players around the world.
+      </p>
+
+      <h2>Roadmap & Future Developments</h2>
+      <ul>
+        <li><strong>Multiplayer Ghost Racing:</strong> Challenge your friends' real-time ghosts on the causeway.</li>
+        <li><strong>Custom Paint & Decal Shop:</strong> Spend your career tokens on custom neon liveries and wheel designs.</li>
+        <li><strong>New Night & Sunset Biomes:</strong> Cruise through Downtown Cyberpunk City and Coastal Highway tunnels.</li>
+        <li><strong>Soundtrack Expansion:</strong> New original synthwave and outrun synth tracks.</li>
+      </ul>
+
+      <div class="actions">
+        <a href="/" class="btn-play">▶ PLAY ROADSTER DASH NOW</a>
+        <a href="/how-to-play.html" class="btn-guide">READ HOW TO PLAY GUIDE →</a>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 Roadster Dash (play-roadster.live) · Created by Youssef Bouchmama</p>
+      <p style="margin-top: 6px;">
+        <a href="/about.html">About</a> · 
+        <a href="/how-to-play.html">How to Play</a> · 
+        <a href="/faq.html">FAQ</a> · 
+        <a href="/terms.html">Terms of Service</a> · 
+        <a href="/privacy.html">Privacy Policy</a> · 
+        <a href="/contact.html">Contact Us</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
